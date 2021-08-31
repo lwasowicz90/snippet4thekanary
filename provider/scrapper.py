@@ -12,4 +12,4 @@ def scrap_headlines(page_text: str, tag: str, attrs: dict):
 
 
 def remove_not_valid_entries(found_data):
-    return filter(lambda item: item['href'].startswith('https://'), found_data)
+    return filter(lambda item: item['href'].startswith('https://') and item.text, found_data)
