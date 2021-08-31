@@ -1,0 +1,16 @@
+{
+  "cnbc": {
+    "url": "https://cnbc.com",
+    "tag": "a",
+    "attrs": {
+      "class": "LatestNews-headline"
+    }
+  },
+  "fox": {
+    "url": "https://abcnews.go.com/International/",
+    "tag": "a",
+    "attrs": {
+      "class": "AnchorLink"
+    }
+  }
+}
