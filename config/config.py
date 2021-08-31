@@ -68,7 +68,7 @@ class JsonDataLoader:
 
 
 ConfigField = collections.namedtuple('ConfigField', 'key type')
-MANDATORY_FIELDS = [ConfigField('url', str), ConfigField('xhr', str)]
+MANDATORY_FIELDS = [ConfigField('url', str), ConfigField('tag', str), ConfigField('attrs', dict)]
 
 
 def validate(config: dict) -> None:

@@ -116,11 +116,13 @@ class TestValidateConfig(unittest.TestCase):
         valid_config = {
             "some_site": {
                 "url": "https://hostname.com",
-                "xhr": "xxx"
+                "tag": "x",
+                "attrs": {"dummy": "dummy2"}
             },
             "some_site2": {
                 "url": "https://hostname2.com",
-                "xhr": "xxx"
+                "tag": "x",
+                "attrs": {"dummy": "dummy2"}
             }
         }
 
@@ -130,11 +132,13 @@ class TestValidateConfig(unittest.TestCase):
         broken_config = {
             "some_site": {
                 "url": "https://hostname.com",
-                "xhr": "xxx"
+                "tag": "x",
+                "attrs": {"dummy": "dummy2"}
             },
             "some_site2": {
                 "url": 123,
-                "xhr": "xxx"
+                "tag": "x",
+                "attrs": {"dummy": "dummy2"}
             }
         }
         with self.assertRaises(SystemExit) as e:
@@ -142,15 +146,17 @@ class TestValidateConfig(unittest.TestCase):
 
         self.assertEqual(e.exception.code, 3)
 
-    def test_validate_when_xhr_not_string(self):
+    def test_validate_when_tag_not_string(self):
         broken_config = {
             "some_site": {
                 "url": "https://hostname.com",
-                "xhr": "xxx"
+                "tag": 43,
+                "attrs": {"dummy": "dummy2"}
             },
             "some_site2": {
                 "url": "https://hostname2.com",
-                "xhr": 22
+                "tag": "x",
+                "attrs": {"dummy": "dummy2"}
             }
         }
         with self.assertRaises(SystemExit) as e:
@@ -158,15 +164,16 @@ class TestValidateConfig(unittest.TestCase):
 
         self.assertEqual(e.exception.code, 3)
 
-    def test_validate_when_missing_xhr_key(self):
+    def test_validate_when_missing_tag_key(self):
         broken_config = {
             "some_site": {
                 "url": "https://hostname.com",
-                "xhr": "xxx"
+                "attrs": {"dummy": "dummy2"}
             },
             "some_site2": {
                 "url": "https://hostname2.com",
-                "other": 'xxx'
+                "tag": "x",
+                "attrs": {"dummy": "dummy2"}
             }
         }
         with self.assertRaises(SystemExit) as e:
@@ -178,11 +185,29 @@ class TestValidateConfig(unittest.TestCase):
         broken_config = {
             "some_site": {
                 "url": "https://hostname.com",
-                "xhr": "xxx"
+                "tag": "x",
+                "attrs": {"dummy": "dummy2"}
             },
             "some_site2": {
-                "other": "https://hostname2.com",
-                "xhr": 'xxx'
+                "tag": "x",
+                "attrs": {"dummy": "dummy2"}
+            }
+        }
+        with self.assertRaises(SystemExit) as e:
+            self.uut(broken_config)
+
+        self.assertEqual(e.exception.code, 3)
+
+    def test_validate_when_missing_attrs_key(self):
+        broken_config = {
+            "some_site": {
+                "url": "https://hostname.com",
+                "tag": "x",
+            },
+            "some_site2": {
+                "url": "https://hostname2.com",
+                "tag": "x",
+                "attrs": {"dummy": "dummy2"}
             }
         }
         with self.assertRaises(SystemExit) as e:
