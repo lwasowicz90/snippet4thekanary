@@ -1,3 +1,4 @@
+"""Module that scraps text data based on html tags and attributes"""
 from bs4 import BeautifulSoup
 
 
@@ -12,4 +13,5 @@ def scrap_headlines(page_text: str, tag: str, attrs: dict):
 
 
 def remove_not_valid_entries(found_data):
+    """Filters out broken items"""
     return filter(lambda item: item['href'].startswith('https://') and item.text, found_data)
