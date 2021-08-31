@@ -1,3 +1,4 @@
+"""Module that make use of reading config, www pages and pages content """
 import logging
 from typing import List
 
@@ -14,6 +15,7 @@ class ProviderManager:
     """Class that delegates: reading pages, scrapping headlines from pages and dumping headlines to file"""
     def __init__(self, config_path: str):
         self._providers_meta_data = ProviderManager._load_providers_meta_data(config_path)
+        # pylint: disable=W1202
         logger.debug("Initialized {} with {} provider(s)".format(ProviderManager.__name__,
                                                                  len(self._providers_meta_data)))
         self._headlines = []
