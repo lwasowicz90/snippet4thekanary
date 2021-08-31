@@ -9,7 +9,7 @@ DATE_FORMATTER = logging.Formatter(fmt='%(asctime)s - %(name)s -  %(levelname)s 
                                    datefmt='%d-%m-%Y %H:%M:%S')
 
 
-def configure_logger(level: int):
+def configure_logger(level: int) -> None:
     """Execute this on app startup"""
     _create_log_dir(LOG_DIR)
 
@@ -25,13 +25,13 @@ def configure_logger(level: int):
     root_logger.info("Configured logger.")
 
 
-def _create_log_dir(dir_name: str):
+def _create_log_dir(dir_name: str) -> None:
     """Creates log directory if needed"""
     if not path.exists(dir_name):
         mkdir(dir_name)
 
 
-def _create_file_handler(filepath: str, level: int):
+def _create_file_handler(filepath: str, level: int) -> logging.FileHandler:
     """Helper function for creating file logger"""
     assert filepath, "Expecting not empty filename!!!"
     file_handler = logging.FileHandler(filepath)
@@ -40,7 +40,7 @@ def _create_file_handler(filepath: str, level: int):
     return file_handler
 
 
-def _create_stream_handler(level: int):
+def _create_stream_handler(level: int) -> logging.StreamHandler:
     """Helper function for creating console logger"""
     stream_handler = logging.StreamHandler()
     stream_handler.setLevel(level)
